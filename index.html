@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='utf-8' />
+    <title>WASM Sobel Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        video {
+            position: absolute;
+            visibility: hidden;
+        }
+        
+        div {
+            border: 8px;
+            padding-left: 0;
+            padding-right: 0;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            width: 600px;
+        }
+        
+        canvas {
+            border: 3px solid gray;
+        }
+        
+        button {
+            color: #fff;
+            background-color: #6496c8;
+            border: none;
+            border-radius: 5px;
+            display: inline-block;
+            min-width: 50px;
+            width: 80px;
+            padding: 5px 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div>
+        <h1>Web Assembly JavaScript Example</h1>
+    </div>
+
+
+    <script type='text/javascript'>
+    // fetch 再载入？？
+        var importObject = {
+          imports: {
+            imported_func: function(arg) {
+              console.log(arg);
+            }
+          }
+        };
+
+        fetch('fibn.wasm')
+            .then(response => response.arrayBuffer())
+            .then(bytes => WebAssembly.instantiate(bytes, importObject))
+            .then(result => {
+                console.log(wa = result.instance.exports);
+            });
+
+
+        function js_fib(n) {
+          if (n==1 || n==2)
+            return 1;
+          else
+            return js_fib(n-1) +js_fib(n-2);
+        }
+    </script>
+
+</body>
+
+</html>
